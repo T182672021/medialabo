@@ -3,9 +3,23 @@ h1 {
 }
 
 h2 {
-    color: rgb(106, 230, 68);
+    color: rgb(116, 245, 223);
 }
 
 h3 {
-    background-color:rgb(160, 160, 160);
+    background-color:rgb(253, 255, 154);
+}
+
+div#zentai {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 10px;
+	padding: 10px;
+	flex-direction: row;
+}
+
+div#zentai > div {
+	padding: 5px;
+	background-color: #f8f8f8;
+    border: 5px solid rgb(51, 199, 167);
 }
