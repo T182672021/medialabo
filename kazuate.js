@@ -32,7 +32,7 @@ function hantei() {
         kaisu = 4;
     } else if(yoso < kotae){
         console.log("まちがい.　答えはもっと大きいですよ");
-    } else if(yoso > kotae){
+    } else{
         console.log("まちがい.　答えはもっと大きいですよ");
     }
   }
