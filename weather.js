@@ -51,3 +51,16 @@ console.log(data.weather[0].description);
 console.log(data.main.temp_min);
 console.log(data.main.temp_max);
 console.log(data.name);
+
+let d = document.querySelector('div#result');
+
+let tbody = document.createElement('tbody');
+table.insertAdjacentElement('beforeend', tbody);
+tr = document.createElement('tr');
+tbody.insertAdjacentElement('beforeend', tr);
+let td = document.createElement('td');
+td.textContent = '天気';
+tr.insertAdjacentElement('beforeend', td);
+td = document.createElement('td');
+td.textContent = data.weather[0].description;
+tr.insertAdjacentElement('beforeend', td);
