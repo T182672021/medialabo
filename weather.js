@@ -54,6 +54,18 @@ console.log(data.name);
 
 let d = document.querySelector('div#result');
 
+let table = document.createElement('table');
+d.insertAdjacentElement('beforeend', table);
+
+let thead = document.createElement('thead');
+table.insertAdjacentElement('beforeend', thead);
+let tr = document.createElement('tr');
+thead.insertAdjacentElement('beforeend', tr);
+let th = document.createElement('th');
+th.setAttribute('clospan', '2');
+th.textContent = '世界の天気（検索結果 1件）';
+tr.insertAdjacentElement('beforeend', th);
+
 let tbody = document.createElement('tbody');
 table.insertAdjacentElement('beforeend', tbody);
 tr = document.createElement('tr');
@@ -63,4 +75,31 @@ td.textContent = '天気';
 tr.insertAdjacentElement('beforeend', td);
 td = document.createElement('td');
 td.textContent = data.weather[0].description;
+tr.insertAdjacentElement('beforeend', td);
+
+tr = document.createElement('tr');
+tbody.insertAdjacentElement('beforeend', tr);
+td = document.createElement('td');
+td.textContent = '最低気温';
+tr.insertAdjacentElement('beforeend', td);
+td = document.createElement('td');
+td.textContent = data.main.temp_min;
+tr.insertAdjacentElement('beforeend', td);
+
+tr = document.createElement('tr');
+tbody.insertAdjacentElement('beforeend', tr);
+td = document.createElement('td');
+td.textContent = '最高気温';
+tr.insertAdjacentElement('beforeend', td);
+td = document.createElement('td');
+td.textContent = data.main.temp_max;
+tr.insertAdjacentElement('beforeend', td);
+
+tr = document.createElement('tr');
+tbody.insertAdjacentElement('beforeend', tr);
+td = document.createElement('td');
+td.textContent = '都市名';
+tr.insertAdjacentElement('beforeend', td);
+td = document.createElement('td');
+td.textContent = data.name;
 tr.insertAdjacentElement('beforeend', td);
