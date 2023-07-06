@@ -62,7 +62,7 @@ table.insertAdjacentElement('beforeend', thead);
 let tr = document.createElement('tr');
 thead.insertAdjacentElement('beforeend', tr);
 let th = document.createElement('th');
-th.setAttribute('clospan', '2');
+th.setAttribute('colspan', '2');
 th.textContent = '世界の天気（検索結果 1件）';
 tr.insertAdjacentElement('beforeend', th);
 
