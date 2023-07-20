@@ -46,60 +46,115 @@ let data = {
 };
 
 ////////// 課題3-2 ここからプログラムを書こう
+let b = document.querySelector('button#kensaku');
+sendRequest();
+let s = 0;
+b.addEventListener('click', greeting);
 
-console.log(data.weather[0].description); 
-console.log(data.main.temp_min);
-console.log(data.main.temp_max);
-console.log(data.name);
+function sendRequest() {
+  // URL を設定
+  let tid = 524901;
+  let url = 'https://www.nishita-lab.org/web-contents/jsons/openweather/' + tid + '.json';
 
-let d = document.querySelector('div#result');
+  // 通信開始
+  axios.get(url)
+      .then(showResult)   // 通信成功
+      .catch(showError)   // 通信失敗
+      .then(finish);      // 通信の最後の処理
+}
 
-let table = document.createElement('table');
-d.insertAdjacentElement('beforeend', table);
+// 通信が成功した時の処理
+function showResult(resp) {
+  // サーバから送られてきたデータを出力
+  data = resp.data;
 
-let thead = document.createElement('thead');
-table.insertAdjacentElement('beforeend', thead);
-let tr = document.createElement('tr');
-thead.insertAdjacentElement('beforeend', tr);
-let th = document.createElement('th');
-th.setAttribute('colspan', '2');
-th.textContent = '世界の天気（検索結果 1件）';
-tr.insertAdjacentElement('beforeend', th);
+  // data が文字列型なら，オブジェクトに変換する
+  if (typeof data === 'string') {
+      data = JSON.parse(data);
+  }
 
-let tbody = document.createElement('tbody');
-table.insertAdjacentElement('beforeend', tbody);
-tr = document.createElement('tr');
-tbody.insertAdjacentElement('beforeend', tr);
-let td = document.createElement('td');
-td.textContent = '天気';
-tr.insertAdjacentElement('beforeend', td);
-td = document.createElement('td');
-td.textContent = data.weather[0].description;
-tr.insertAdjacentElement('beforeend', td);
+  // data をコンソールに出力
+  console.log(data);
 
-tr = document.createElement('tr');
-tbody.insertAdjacentElement('beforeend', tr);
-td = document.createElement('td');
-td.textContent = '最低気温';
-tr.insertAdjacentElement('beforeend', td);
-td = document.createElement('td');
-td.textContent = data.main.temp_min;
-tr.insertAdjacentElement('beforeend', td);
+  // data.x を出力
+  console.log(data.x);
+}
 
-tr = document.createElement('tr');
-tbody.insertAdjacentElement('beforeend', tr);
-td = document.createElement('td');
-td.textContent = '最高気温';
-tr.insertAdjacentElement('beforeend', td);
-td = document.createElement('td');
-td.textContent = data.main.temp_max;
-tr.insertAdjacentElement('beforeend', td);
+// 通信エラーが発生した時の処理
+function showError(err) {
+  console.log(err);
+}
 
-tr = document.createElement('tr');
-tbody.insertAdjacentElement('beforeend', tr);
-td = document.createElement('td');
-td.textContent = '都市名';
-tr.insertAdjacentElement('beforeend', td);
-td = document.createElement('td');
-td.textContent = data.name;
-tr.insertAdjacentElement('beforeend', td);
+// 通信の最後にいつも実行する処理
+function finish() {
+  console.log('Ajax 通信が終わりました');
+}
+
+function greeting() {
+  if(s === 1){
+    let t = document.querySelector('table');
+    t.remove();
+  }
+
+  sendRequest();
+
+  console.log(data.weather[0].description); 
+  console.log(data.main.temp_min);
+  console.log(data.main.temp_max);
+  console.log(data.name);
+
+  let d = document.querySelector('div#result');
+
+  let table = document.createElement('table');
+  d.insertAdjacentElement('beforeend', table);
+
+  let thead = document.createElement('thead');
+  table.insertAdjacentElement('beforeend', thead);
+  //let tr = document.createElement('tr');
+  //thead.insertAdjacentElement('beforeend', tr);
+  let th = document.createElement('th');
+  th.setAttribute('colspan', '2');
+  th.textContent = '都市名　　' + data.name + '　　';
+  thead.insertAdjacentElement('beforeend', th);
+
+  let tbody = document.createElement('tbody');
+  table.insertAdjacentElement('beforeend', tbody);
+
+  /*tr = document.createElement('tr');
+  tbody.insertAdjacentElement('beforeend', tr);
+  let td = document.createElement('td');
+  td.textContent = '都市名';
+  tr.insertAdjacentElement('beforeend', td);
+  td = document.createElement('td');
+  td.textContent = '都市名' + data.name;
+  tr.insertAdjacentElement('beforeend', td);*/
+
+  let tr = document.createElement('tr');
+  tbody.insertAdjacentElement('beforeend', tr);
+  let td = document.createElement('td');
+  td.textContent = '天気';
+  tr.insertAdjacentElement('beforeend', td);
+  td = document.createElement('td');
+  td.textContent = data.weather[0].description;
+  tr.insertAdjacentElement('beforeend', td);
+
+  tr = document.createElement('tr');
+  tbody.insertAdjacentElement('beforeend', tr);
+  td = document.createElement('td');
+  td.textContent = '最低気温';
+  tr.insertAdjacentElement('beforeend', td);
+  td = document.createElement('td');
+  td.textContent = data.main.temp_min;
+  tr.insertAdjacentElement('beforeend', td);
+
+  tr = document.createElement('tr');
+  tbody.insertAdjacentElement('beforeend', tr);
+  td = document.createElement('td');
+  td.textContent = '最高気温';
+  tr.insertAdjacentElement('beforeend', td);
+  td = document.createElement('td');
+  td.textContent = data.main.temp_max;
+  tr.insertAdjacentElement('beforeend', td);
+
+  s = 1;
+}

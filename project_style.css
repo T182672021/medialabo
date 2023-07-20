@@ -1,13 +1,22 @@
 table,
 td {
     border: 1px solid blue;
-    color: orange;
     font-size: 1.5em;
 }
 
-thead,
-tfoot{
-    background-color: #333;
-    color: #fff;
+th{
     font-size: 2em;
+    background-color: #333;
+    color: white;
+}
+
+td{
+    color: orange;
+}
+
+tr{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 2.5px;
+    grid-gap: 5px;
 }
