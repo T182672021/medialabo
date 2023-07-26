@@ -26,6 +26,7 @@ function hantei() {
 
   let k = document.querySelector('span#kaisu');
   k.textContent =  kaisu;
+  
   let a = document.querySelector('span#answer');
   a.textContent =  yoso;
 
