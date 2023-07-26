@@ -20,6 +20,11 @@ tr{
     grid-gap: 5px;
 }
 
+div#result{
+    display: grid;
+    grid-gap: 20px;
+}
+
 h1,
 td{
     color: orange;
@@ -27,6 +32,10 @@ td{
 
 h1{
     font-size: 3em;
+}
+
+h2{
+    font-size: 1.5em;
 }
 
 ti{
