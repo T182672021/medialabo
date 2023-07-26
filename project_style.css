@@ -1,7 +1,10 @@
 table,
-td {
+td,
+ti,
+tk{
     border: 1px solid blue;
     font-size: 1.5em;
+    background-color: white;
 }
 
 th{
@@ -10,13 +13,26 @@ th{
     color: white;
 }
 
-td{
-    color: orange;
-}
-
 tr{
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 2.5px;
     grid-gap: 5px;
+}
+
+h1,
+td{
+    color: orange;
+}
+
+h1{
+    font-size: 3em;
+}
+
+ti{
+	color: blue;
+}
+
+tk{
+	color: red;
 }

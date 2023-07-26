@@ -46,14 +46,29 @@ let data = {
 };
 
 ////////// 課題3-2 ここからプログラムを書こう
-let b = document.querySelector('button#kensaku');
-sendRequest();
 let s = 0;
-b.addEventListener('click', greeting);
+let b = document.querySelector('button#kensaku');
+b.addEventListener('click', kensaku);
 
-function sendRequest() {
+function kensaku() {
+  let rs = document.querySelectorAll('input[name="tenki"]');
+	for (let r of rs) {
+		if (r.checked) {		// r が選択されていたら
+			console.log(r.value);
+      let id = r.value;
+      sendRequest(id);
+	  }
+    if(s > 0){
+      let t = document.querySelector('table');
+      t.remove();
+      s--;
+    }
+  }
+}
+
+function sendRequest(id) {
   // URL を設定
-  let tid = 524901;
+  let tid = id;
   let url = 'https://www.nishita-lab.org/web-contents/jsons/openweather/' + tid + '.json';
 
   // 通信開始
@@ -75,9 +90,7 @@ function showResult(resp) {
 
   // data をコンソールに出力
   console.log(data);
-
-  // data.x を出力
-  console.log(data.x);
+  hyouji(data);
 }
 
 // 通信エラーが発生した時の処理
@@ -90,13 +103,8 @@ function finish() {
   console.log('Ajax 通信が終わりました');
 }
 
-function greeting() {
-  if(s === 1){
-    let t = document.querySelector('table');
-    t.remove();
-  }
-
-  sendRequest();
+function hyouji(data) {
+  data = data;
 
   console.log(data.weather[0].description); 
   console.log(data.main.temp_min);
@@ -120,15 +128,6 @@ function greeting() {
   let tbody = document.createElement('tbody');
   table.insertAdjacentElement('beforeend', tbody);
 
-  /*tr = document.createElement('tr');
-  tbody.insertAdjacentElement('beforeend', tr);
-  let td = document.createElement('td');
-  td.textContent = '都市名';
-  tr.insertAdjacentElement('beforeend', td);
-  td = document.createElement('td');
-  td.textContent = '都市名' + data.name;
-  tr.insertAdjacentElement('beforeend', td);*/
-
   let tr = document.createElement('tr');
   tbody.insertAdjacentElement('beforeend', tr);
   let td = document.createElement('td');
@@ -140,21 +139,21 @@ function greeting() {
 
   tr = document.createElement('tr');
   tbody.insertAdjacentElement('beforeend', tr);
-  td = document.createElement('td');
-  td.textContent = '最低気温';
-  tr.insertAdjacentElement('beforeend', td);
-  td = document.createElement('td');
-  td.textContent = data.main.temp_min;
-  tr.insertAdjacentElement('beforeend', td);
+  let ti = document.createElement('ti');
+  ti.textContent = '最低気温';
+  tr.insertAdjacentElement('beforeend', ti);
+  ti = document.createElement('ti');
+  ti.textContent = data.main.temp_min;
+  tr.insertAdjacentElement('beforeend', ti);
 
   tr = document.createElement('tr');
   tbody.insertAdjacentElement('beforeend', tr);
-  td = document.createElement('td');
-  td.textContent = '最高気温';
-  tr.insertAdjacentElement('beforeend', td);
-  td = document.createElement('td');
-  td.textContent = data.main.temp_max;
-  tr.insertAdjacentElement('beforeend', td);
+  let tk = document.createElement('tk');
+  tk.textContent = '最高気温';
+  tr.insertAdjacentElement('beforeend', tk);
+  tk = document.createElement('tk');
+  tk.textContent = data.main.temp_max;
+  tr.insertAdjacentElement('beforeend', tk);
 
-  s = 1;
+  s++;
 }
